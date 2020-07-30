@@ -28,28 +28,226 @@ body {font-family: 'Noto Serif KR', serif; font-weight: 400; font-size: 14px; co
 #skip-nav {position: fixed; left: 0; top: -40px; width: 100%; line-height: 40px; text-align: center; font-size: 16px; color: #ffffff; background: rgba(0, 0, 0, 0.6); z-index: 10000; transition: top 0.3s;}
 #skip-nav:focus {top: 0;}
 
-/* header */
-#header {position: fixed; left: 0; top: 0; width: 100%; height: 100px; z-index: 1000; background: #eeeeee;}
-#header h1 {position: absolute; left: 50px; bottom: 0; background: pink;}
+#header {position: fixed; left: 0; top: 0; width: 100%; height: 100px; z-index: 1000;}
+#header h1 {position: absolute; left: 50px; bottom: 0;}
 #header h1 a {display: block; width: 100%; height: 100%;}
 #header h1 a img.icon1 {position: absolute; top: 0; left: 50%; transform: translate(-110%, 0);}
 #header h1 a img.icon2 {position: absolute; top: 10px; left: 50%; transform: translate(10%, 0);}
-#header a.menu {position: absolute; right: 50px; bottom: 0; font-size: 26px; font-weight: 700; padding-right: 40px; background: pink;}
-#header a.menu img {position: absolute; right: 0; top: 50%; transform: translate(0, -50%);}
+#header h1 a:hover img.icon1 {animation: logo-effect 0.5s linear 0s infinite alternate forwards;}
+#header h1 a:hover img.icon2 {animation: logo-effect 0.5s linear 0s infinite alternate-reverse forwards;}
+#header a.menu {position: absolute; right: 50px; bottom: 0; font-size: 26px; font-weight: 700; padding-right: 40px;}
+#header a.menu img {position: absolute; right: 0; top: 50%; transform: translate(0, -50%); transition: transform 0.5s;}
+#header a.menu:hover img {transform: translate(0, -50%) rotate(90deg);}
+
 /* box-shadow는 x축, y축, 번짐의 정도, 그림자의 크기(거의 안씀), 색상 */
-#gnb {position: fixed; right: 0; top: 0; width: 450px; height: 100%; background: white; box-shadow: -10px 0 50px 0 rgba(0, 0, 0, 0.3);}
+#gnb {position: fixed; right: -500px; top: 0; width: 450px; height: 100%; background: #ffffff; box-shadow: -10px 0 50px 0 rgba(0, 0, 0, 0.3); overflow: hidden; transform: right 0.3s; z-index: 100; transition: right 0.5s;}
+#gnb.open {right: 0;}
+/* animation : 정의한 keyframes, animation 시간, timing function, delay time, animation 실행 횟수, 마지막 두 개는 실행 순서 */
+#gnb img.bg1 {position: absolute; right: -100px; top: 10px; animation: rotate-forward 20s linear 0s infinite normal forwards;}
+#gnb img.bg2 {position: absolute; right: 30px; bottom: 15%; animation: rotate-backward 30s linear 0s infinite normal forwards;}
+#gnb:before {content: ''; position: absolute; left: -130px; bottom: 30%; width: 200px; height: 200px; border-radius: 200px; background: rgba(243, 241, 230, 0.4);}
 /* 고정되어 있을 때는 absolute가 가장 깔끔 */
 #gnb a.close {position: absolute; right: 50px; top: 50px;}
-#gnb ul {position: absolute; left: 100px; top: 50%; transform: translate(0, -50%); font-size: 25px;}
-#gnb ul li + li {margin-top: 40px;}
+#gnb ul {position: absolute; left: 100px; top: 50%; transform: translate(0, -50%); font-size: 26px; font-weight: 200;}
+#gnb ul li + li {margin-top: 34px;}
 #gnb ul li a {display: block; position: relative;}
-#gnb ul li a::before {content: ""; position: absolute; left: 0; top: 0; width: 20px; height: 20px; border-radius: 20px; background: yellow;}
+#gnb ul li a:before {content: ''; position: absolute; left: -12px; top: -2px; width: 20px; height: 20px; border-radius: 20px; z-index: -1; background: transparent; transition: background 0.5s;}
+#gnb ul li a:hover:before {background: #ede6d2;}
 #gnb p.copyright {position: absolute; left: 0; bottom: 50px; width: 100%; text-align: center; color: #999999; font-size: 13px;}
+
+/* width는 가능하면 짝수로 지정하는 것이 나음 => center를 맞추기 더 쉬움 */
+#quick-menu {position: fixed; right: 30px; top: 200px; background: #2a2928; color: #cfcfcf; width: 120px; text-align: center;}
+/* 큰 틀을 잡아놓고 세세하게 조정하는 것이 더 편함! */
+#quick-menu em {display: block;}
+/* gnb에 class="open"이 들어가면 gnb가 보이도록 css 디자인 */
+#quick-menu a.open {position: absolute; width: 90px; height: 90px; left: 15px; top: -50px; border-radius: 100px; overflow: hidden; background: #2a2928; border: 1px solid #cbac75; box-sizing: border-box; padding-top: 25px; color: #ffffff; font-size: 14px; font-weight: 700;}
+#quick-menu a.open img {transition: transform 0.5s;}
+#quick-menu a.open span {font-size: 20px;}
+#quick-menu ul {padding: 50px 0 10px 0; overflow: hidden; height: 610px; transition: height 0.5s; font-size: 13px; font-weight: 200;}
+#quick-menu ul li {position: relative;}
+#quick-menu ul li:before {content: ''; position: absolute; left: 50%; transform: translate(-50%, 0); bottom: -3px; width: 70%; height: 1px; background: #cfcfcf;}
+#quick-menu ul li + li {margin-top: 5px;}
+#quick-menu ul li a {display: block; padding: 10px 5px;}
+#quick-menu a.top {display: block; padding: 15px 5px;}
+#quick-menu.close a.open img {transform: rotate(180deg);}
+#quick-menu.close ul {height: 0;}
+#header span.haccp {position: absolute; left: 50px; bottom: -140px;}
+
+#footer {position: relative; background: #1a1b1d; color: #878683; font-size: 13px;}
+#footer:before {content: ''; position: absolute; left: 0; top: 60px; width: 100%; height: 1px; background: #3a3a3a;}
+#footer > div {position: relative; max-width: 1200px; margin: 0 auto; box-sizing: border-box;}
+#footer > div.footer-top {line-height: 60px; font-size: 15px;}
+#footer > div.footer-top a.shop {color: #ffffff;}
+#footer > div.footer-top a.shop i {margin-right: 10px; position: relative; top: -2px;}
+#footer > div.footer-top ul.link {position: absolute; right: 0; top: 0;}
+#footer > div.footer-top ul.link li {float: left;}
+#footer > div.footer-top ul.link li + li {margin-left: 20px;}
+#footer > div.footer-top ul.link li a {transition: color 0.3s; font-size: 14px;}
+#footer > div.footer-top ul.link li a:hover {color: #e0e0e0;}
+#footer > div.footer-bottom {position: relative; padding: 40px 0 40px 200px;}
+#footer > div.footer-bottom h2 {position: absolute; left: 0; top: 50%; transform: translate(0, -50%);}
+#footer > div.footer-bottom h3 {font-size: 16px; margin-bottom: 20px;}
+#footer > div.footer-bottom address {line-height: 1.6em; margin: 15px 0; font-size: 14px;}
+#footer > div.footer-bottom address span + span {margin-left: 30px;}
+#footer > div.footer-bottom p.copyright {color: #595755;}
+#footer div.contact {position: absolute; right: 0; top: 50%; transform: translate(0, -50%); color: #b29a6e; font-size: 13px; border: 1px solid #b29a6e; padding: 20px;}
+#footer div.contact p {font-size: 16px; color: #e1c38e; margin-bottom: 10px;}
+#footer div.contact p i {margin-right: 10px; font-size: 20px;}
+#footer div.contact p em {font-size: 26px; color: #d9d6c5; font-weight: 700; margin-left: 30px;}
+
+
+
+
+
+/* main */
+/* 아래와 같이 body.main #main {}이라고 쓰면 id가 main인 페이지에만 적용됨 */
+/* %는 부모 높이를 기준으로 하는데, 여기서는 브라우저가 기준이므로 vh를 사용 */
+body.main #main {padding-top: 100vh;}
+/* fixed를 하면 뜨기 때문에 밑에 있던 내용이 모두 위로 올라옴 */
+#main-visual {position: fixed; left: 0; top: 0; width: 100%; height: 100%; background: #f2f2f2;}
+#main-visual:before {content: ''; position: absolute; left: 0; top: 0; width: 380px; height: 100%; background: #ffffff;}
+#main-visual > div.content {position: absolute; left: 0; top: 0; width: 100%; height: 100%; display: none;}
+/* 모양이 똑같으면 하나를 기준으로 작업한 다음에 나머지에 똑같이 적용하면 됨 */
+#main-visual > div.content:nth-child(1) {display: block;}
+#main-visual > div.content img.icon-top {position: absolute; left: 450px; top: 0;}
+#main-visual > div.content img.icon-left {position: absolute; left: 15%; bottom: 2%;}
+#main-visual > div.content img.icon-right {position: absolute; right: -30px; top: 150px;}
+#main-visual > div.content div.text {position: absolute; left: 10%; top: 50%; transform: translate(0, -50%);}
+#main-visual > div.content div.text h3 {font-size: 70px; line-height: 80px;}
+#main-visual > div.content div.text ul {margin: 40px 0; font-size: 16px; color: #999999;}
+#main-visual > div.content div.text ul li {background: url(../img/icon_bullet.gif) 0 center no-repeat; padding-left: 25px;}
+#main-visual > div.content div.text ul li + li {margin-top: 10px;}
+#main-visual > div.content div.text a {position: relative; display: inline-block; padding: 0 20px; transition: color 0.6s;}
+#main-visual > div.content div.text a:before {content: ''; position: absolute; left: 0; top: 50%; transform: translate(-50%, -50%); width: 6px; height: 6px; background: #000000; border-radius: 100%; z-index: -1;}
+#main-visual > div.content div.text a:hover:before {animation: dot-effect-left 0.6s ease-out 0s 1 normal forwards;}
+#main-visual > div.content div.text a:after {content: ''; position: absolute; right: 0; top: 50%; transform: translate(50%, -50%); width: 6px; height: 6px; background: #000000; border-radius: 100%; z-index: -1;}
+#main-visual > div.content div.text a:hover:after {animation: dot-effect-right 0.6s ease-out 0s 1 normal forwards;}
+#main-visual > div.content div.text a:hover {color: #ffffff;}
+
+#main-visual > div.indicator {position: fixed; bottom: -10vw; right: 160px; width: 50vw; height: 50vw; overflow: hidden;}
+#main-visual > div.indicator ul.visual li {position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: calc(100% - 200px); height: calc(100% - 200px); overflow: hidden; border-radius: 100%; box-sizing: border-box; background-size: 100% auto;}
+#main-visual > div.indicator ul.visual li:nth-child(1) {background: url(../img/main_visual_01.jpg) center center no-repeat;}
+#main-visual > div.indicator ul.visual li:nth-child(2) {background: url(../img/main_visual_02.jpg) center center no-repeat;}
+#main-visual > div.indicator ul.visual li:nth-child(3) {background: url(../img/main_visual_03.jpg) center center no-repeat;}
+#main-visual > div.indicator ul.visual li:nth-child(4) {background: url(../img/main_visual_04.jpg) center center no-repeat;}
+#main-visual > div.indicator ul.visual li:nth-child(5) {background: url(../img/main_visual_05.jpg) center center no-repeat;}
+#main-visual > div.indicator ul.visual li img {position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 85%;}
+
+#main-visual > div.indicator:before {content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: calc(100% - 72px); height: calc(100% - 72px); border: 2px solid #e0e0e0; border-radius: 100%; box-sizing: border-box;}
+/* boder의 모양을 dashed로 바꾸면 점선이 나타남 */
+#main-visual > div.indicator:after {content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: calc(100% - 136px); height: calc(100% - 136px); border: 2px dashed #e0e0e0; border-radius: 100%; box-sizing: border-box; animation: rotate-forward-indicator 80s linear 0s infinite normal forwards;}
+#main-visual > div.indicator ul.product {position: absolute; left: 0; top: 0; width: 100%; height: 100%; transform: rotate(0); transition: transform 0.5s;}
+/* 클릭이 되도록 z-index를 키워줌 */
+#main-visual > div.indicator ul.product li {position: absolute; left: 50%; top: 0; transform: translate(-50%, 0); height: 50%; transform-origin: center bottom;}
+/* translate(-50%,0)를 명시해줘야 중앙이 맞춰짐 */
+#main-visual div.indicator ul.product li:nth-child(1) {transform: translate(-50%, 0) rotate(0);}
+#main-visual div.indicator ul.product li:nth-child(2) {transform: translate(-50%, 0) rotate(36deg);}
+#main-visual div.indicator ul.product li:nth-child(3) {transform: translate(-50%, 0) rotate(72deg);}
+#main-visual div.indicator ul.product li:nth-child(4) {transform: translate(-50%, 0) rotate(108deg);}
+#main-visual div.indicator ul.product li:nth-child(5) {transform: translate(-50%, 0) rotate(144deg);}
+#main-visual div.indicator ul.product li:nth-child(6) {transform: translate(-50%, 0) rotate(180deg);}
+#main-visual div.indicator ul.product li:nth-child(7) {transform: translate(-50%, 0) rotate(216deg);}
+#main-visual div.indicator ul.product li:nth-child(8) {transform: translate(-50%, 0) rotate(252deg);}
+#main-visual div.indicator ul.product li:nth-child(9) {transform: translate(-50%, 0) rotate(288deg);}
+#main-visual div.indicator ul.product li:nth-child(10) {transform: translate(-50%, 0) rotate(324deg);}
+#main-visual > div.indicator ul.product li a {display: block; text-align: center; font-size: 13px; color: #999999;}
+#main-visual > div.indicator ul.product li a em {display: block; margin-bottom: 10px;}
+#main-visual > div.indicator ul.product li a span {position: relative; display: inline-block; width: 16px; height: 16px; border-radius: 20px;}
+#main-visual > div.indicator ul.product li a span:before {content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 22px; height: 22px; border-radius: 100%; border: 2px solid #e0e0e0; background: #ffffff; z-index: -1; transition: all 0.5s;}
+#main-visual > div.indicator ul.product li a:hover span:before {width: 28px; height: 28px; border-style: dashed; animation: rotate-forward-indicator 10s linear 0s infinite normal forwards;}
+#main-visual div.indicator ul.product li:nth-child(5n-4) a span {background: #9fd7d9;}
+#main-visual div.indicator ul.product li.on:nth-child(5n-4) a span:before {border: 2px solid #9fd7d9;}
+#main-visual div.indicator ul.product li:nth-child(5n-3) a span {background: #e7e48e;}
+#main-visual div.indicator ul.product li.on:nth-child(5n-3) a span:before {border: 2px solid #e7e48e;}
+#main-visual div.indicator ul.product li:nth-child(5n-2) a span {background: #f6b8c4;}
+#main-visual div.indicator ul.product li.on:nth-child(5n-2) a span:before {border: 2px solid #f6b8c4;}
+#main-visual div.indicator ul.product li:nth-child(5n-1) a span {background: #945b35;}
+#main-visual div.indicator ul.product li.on:nth-child(5n-1) a span:before {border: 2px solid #945b35;}
+#main-visual div.indicator ul.product li:nth-child(5n) a span {background: #f17a8b;}
+#main-visual div.indicator ul.product li.on:nth-child(5n) a span:before {border: 2px solid #f17a8b;}
+
+/* position: relative를 이용해서 이미지를 위로 올려줌 */
+#main-brand {position: relative; background: #ffffff; padding-top: 150px;}
+#main-brand h2 {text-align: center; background: url(../img/bg_title.png) center bottom no-repeat; font-size: 36px; padding-bottom: 40px; margin-bottom: 50px;}
+#main-brand div.content {position: relative;}
+#main-brand div.content:before {content: ''; position: absolute; left: 20px; top: 20px; width: calc(100% - 40px); height: 1px; background: #ffffff; z-index: 10;}
+#main-brand div.content:after {content: ''; position: absolute; right: 20px; bottom: 20px; width: calc(100% - 40px); height: 1px; background: #ffffff; z-index: 10;}
+#main-brand div.content span.line:before {content: ''; position: absolute; right: 20px; top: 20px; width: 1px; height: calc(100% - 40px); background: #ffffff; z-index: 10;}
+#main-brand div.content span.line:after {content: ''; position: absolute; left: 20px; bottom: 20px; width: 1px; height: calc(100% - 40px); background: #ffffff; z-index: 10;}
+#main-brand div.content img.bg {min-width: 100%; position: relative; left: 50%; transform: translate(-50%, 0);}
+#main-brand div.content img.sub {position: absolute; left: calc(50% - 237px); bottom: -178px; transform: translate(-50%, 0); z-index: 100;}
+#main-brand div.content div.text {position: absolute; left: 10%; top: 50%; transform: translate(0, -50%);}
+#main-brand div.content div.text p {margin: 20px 0; font-size: 15px; line-height: 1.8em;}
+#main-brand div.content div.text em {color: #b29a6e; font-weight: 700; text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);}
+
+#main-macaron {position: relative; background: #f4f4f4; padding-top: 150px; padding-bottom: 100px;}
+/* main-brand의 h2와 main-macaron의 h2는 공통요소이므로 h2라는 클래스로 묶어서 사용하는 것이 더 깔끔 => 코드가 정리됨 */
+#main-macaron h2 {text-align: center; background: url(../img/bg_title.png) center bottom no-repeat; font-size: 36px; padding-bottom: 40px; margin-bottom: 50px;}
+#main-macaron div.indicator {text-align: center; margin-bottom: 50px;}
+/* *은 모든 요소를 의미함 | 모든 요소를 inline-block으로 만들어서 한 줄로 나타냄 */
+#main-macaron div.indicator * {display: inline-block;}
+#main-macaron div.indicator em {font-size: 16px; color: #c7a569;}
+#main-macaron div.indicator li {margin-left: 30px;}
+#main-macaron div.indicator li a {position: relative; display: block; width: 30px; height: 30px; border-radius: 100%; box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.2);}
+#main-macaron div.indicator li.on a:before {content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 46px; height: 46px; border-radius: 100%; border: 1px dashed #c7a569; animation: rotate-forward-indicator 10s linear 0s infinite normal forwards;}
+#main-macaron ul.product {overflow: hidden; padding: 0 30px;}
+/* 카드형 디자인은 하나만 디자인해도 모든 카드형에 다 적용이 되므로 반응형 만들기 더 편리! */
+/* 카드 모양을 만들 때, 4개를 넣을거면 width를 25%로 설정하면 됨 */
+#main-macaron ul.product li {float: left; width: 25%; overflow: hidden; text-align: center; margin-bottom: 50px; padding: 0 5px; box-sizing: border-box;}
+#main-macaron ul.product li * {display: block;}
+#main-macaron ul.product li span.image {position: relative; margin: 0 auto;}
+#main-macaron ul.product li span.image img {width: 100%;}
+#main-macaron ul.product li span.image img.hover {position: absolute; left: 0; top: 0; opacity: 0; transition: opacity 0.5s;}
+#main-macaron ul.product li a:hover span.image img.hover {opacity: 1;}
+#main-macaron ul.product li em {font-size: 20px; margin: 10px 0;}
+#main-macaron ul.product li span.en {font-size: 14px; color: #d8b77e;}
+
+
+/* animation */
+@keyframes logo-effect {
+    0% {top: 0;}
+    100% {top: 10px;}
+}
+@keyframes rotate-forward {
+    0% {transform: rotate(0deg);} /* animation start point */
+    100% {transform: rotate(360deg);} /* animation end point */
+}
+@keyframes rotate-backward {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(-360deg);}
+}
+@keyframes rotate-forward-indicator {
+    0% {transform: translate(-50%, -50%) rotate(0deg);}
+    100% {transform: translate(-50%, -50%) rotate(360deg);}
+}
+@keyframes dot-effect-left {
+    0% {left: 0;}
+    50% {left: 50%;}
+    100% {left: 50%; width: 60px; height: 60px;}
+}
+@keyframes dot-effect-right {
+    0% {right: 0;}
+    50% {right: 50%;}
+    100% {right: 50%; width: 60px; height: 60px;}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 /*
-
 animation: circle-effect 1.5s ease-out 0s infinite normal forwards;
 
 @keyframes circle-effect {
