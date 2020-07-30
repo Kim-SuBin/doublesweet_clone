@@ -73,6 +73,32 @@ body {font-family: 'Noto Serif KR', serif; font-weight: 400; font-size: 14px; co
 #quick-menu.close ul {height: 580px;}
 #header span.haccp {position: absolute; left: 50px; bottom: -140px;}
 
+/* footer */
+#footer {position: relative; background: #1a1b1d; color: #878683; font-size: 13px;}
+/* #footer:before {content: ''; position: absolute; left: 0; top: 60px; width: 100%; height: 1px; background: #3a3a3a;} */
+/* #footer > div {position: relative; max-width: 1200px; margin: 0 auto; box-sizing: border-box;} */
+#footer > div.footer-top {padding: 20px 15px; border-bottom: 1px solid #3a3a3a; text-align: center;}
+#footer > div.footer-top a.shop {color: #ffffff; background: #bca378; display: block; padding: 5px; }
+#footer > div.footer-top a.shop i {margin-right: 10px; position: relative; top: -2px;}
+/* #footer > div.footer-top ul.link {position: absolute; right: 0; top: 0;} */
+#footer > div.footer-top ul.link {margin-top: 20px;}
+#footer > div.footer-top ul.link li {display: inline-block;}
+#footer > div.footer-top ul.link li + li {margin-left: 20px;}
+#footer > div.footer-top ul.link li a {transition: color 0.3s; font-size: 14px;}
+#footer > div.footer-top ul.link li a:hover {color: #e0e0e0;}
+#footer > div.footer-bottom {position: relative; text-align: center; padding: 30px 15px;}
+#footer > div.footer-bottom h2 {margin-bottom: 30px;}
+#footer > div.footer-bottom h2 img {width: 100px;}
+#footer > div.footer-bottom h3 {font-size: 16px; margin-bottom: 20px;}
+#footer > div.footer-bottom address {line-height: 1.6em; margin: 15px 0; font-size: 14px;}
+#footer > div.footer-bottom address span {display: block;}
+#footer > div.footer-bottom p.copyright {color: #595755;}
+#footer div.contact {color: #b29a6e; font-size: 13px; border: 1px solid #b29a6e; padding: 20px; margin-top: 30px;}
+#footer div.contact p {font-size: 16px; color: #e1c38e; margin-bottom: 10px;}
+#footer div.contact p i {margin-right: 10px; font-size: 20px;}
+#footer div.contact p em {font-size: 26px; color: #d9d6c5; font-weight: 700; margin-left: 30px;}
+
+
 /* main */
 body.main #main {padding-top: 100vh;}
 #main-visual {position: fixed; left: 0; top: 0; width: 100%; height: 100%; background: #f2f2f2;}
